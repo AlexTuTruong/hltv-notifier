@@ -11,6 +11,16 @@ headers = {
 
 
 def matches_today():
+    """
+    Returns a list of dictionary objects, each being a match played within the day (00:00 - 23:59).
+    Example object:
+    dict = {
+        "Series": "ESL Challenger League Season 47 Europe",
+        "Team 1": "Virtus.pro",
+        "Team 2": "Falcons",
+        "Time": 14:00,
+    }
+    """
     response = requests.get(URL, headers=headers, timeout=30)
 
     if response.status_code == 200:
@@ -41,8 +51,8 @@ def matches_today():
 
                 dict = {
                     "Series": match.get("title"),
-                    "Team 1": teams[0].text[1:],
-                    "Team 2": teams[1].text[1:],
+                    "Team 1": teams[0].text.lstrip(),
+                    "Team 2": teams[1].text.lstrip(),
                     "Time": time,
                 }
 
@@ -52,6 +62,7 @@ def matches_today():
 
 
 def within_day(unix_timestamp):
+    """Returns true if the given unix timestamp is within the current day (00:00 - 23:59), false otherwise"""
     date_time = datetime.fromtimestamp(unix_timestamp / 1000)
     now = datetime.now().date()
     day_start = datetime.combine(now, datetime.min.time())
@@ -61,6 +72,7 @@ def within_day(unix_timestamp):
 
 
 def main():
+    """Prints all matches for the current day"""
     matches = matches_today()
 
     for match in matches:
