@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 URL = "https://www.hltv.org/"
@@ -41,11 +41,10 @@ def matches_today():
 
                 dict = {
                     "Series": match.get("title"),
-                    "Team 1": teams[0].text,
-                    "Team 2": teams[1].text,
+                    "Team 1": teams[0].text[1:],
+                    "Team 2": teams[1].text[1:],
                     "Date/Time": time,
                 }
-                print(dict)
 
                 match_dicts.append(dict)
 
