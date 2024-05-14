@@ -43,7 +43,7 @@ def matches_today():
                     "Series": match.get("title"),
                     "Team 1": teams[0].text[1:],
                     "Team 2": teams[1].text[1:],
-                    "Date/Time": time,
+                    "Time": time,
                 }
 
                 match_dicts.append(dict)
