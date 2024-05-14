@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime, timedelta
 
 
 URL = 'https://www.hltv.org/'
@@ -21,17 +22,36 @@ def matches_today():
         for match in matches:
 
             teams = match.find_all('div', class_='teamrow')
+            date = int(match.find('div', class_='middleExtra').get('data-unix') if match.find('div', class_='middleExtra') else '0')
 
-            dict = {
-                'Series': match.get('title'),
-                'Team 1': teams[0].text,
-                'Team 2': teams[1].text,
-                'Date/Time': match.find('div', class_='middleExtra').get('data-unix') if match.find('div', class_='middleExtra') else 'Match is Live'
-            }
+            if date == 0 or within_day(date):
+                if date == 0:
+                    time = 'Live'
+                else:
+                    date_time = datetime.fromtimestamp(date/1000)
+                    time = date_time.strftime('%H:%M')
 
-            match_dicts.append(dict)
+                dict = {
+                    'Series': match.get('title'),
+                    'Team 1': teams[0].text,
+                    'Team 2': teams[1].text,
+                    'Date/Time': time
+                }
+                print(dict)
+
+                match_dicts.append(dict)
 
     return match_dicts
+
+
+def within_day(unix_timestamp):
+    date_time = datetime.fromtimestamp(unix_timestamp/1000)
+    now = datetime.now().date()
+    now = now + timedelta(days=1)
+    day_start = datetime.combine(now, datetime.min.time())
+    day_end = datetime.combine(now, datetime.max.time())
+
+    return day_start <= date_time <= day_end
 
 
 def main():
