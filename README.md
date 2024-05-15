@@ -39,11 +39,18 @@ There are some Limitations to SMS, primarily character count (160), this is exag
 
 You can run a cron job on a service like [modal](https://modal.com/) if you don't have a server or computer you'd like to run this on
 
-## Image
-Images to be added...
+## Output
 
 Script being run:
+```bash
+/hltv-notifier/src$ python3 main.py
+sending message:
+ Subject: FlyQuest is playing!
 
+vs Vantage @ 05:00
+vs Vantage @ 06:00
+Message sent
+```
 
 Recieved SMS message:
 
