@@ -43,7 +43,7 @@ You can run a cron job on a service like [modal](https://modal.com/) if you don'
 
 Script being run:
 
-```bash
+```
 /hltv-notifier/src$ python3 main.py
 sending message:
  Subject: FlyQuest is playing!
