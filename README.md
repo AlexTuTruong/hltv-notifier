@@ -42,6 +42,7 @@ You can run a cron job on a service like [modal](https://modal.com/) if you don'
 ## Output
 
 Script being run:
+
 ```bash
 /hltv-notifier/src$ python3 main.py
 sending message:
@@ -54,6 +55,7 @@ Message sent
 
 Recieved SMS message:
 
+![textexample (Medium)](https://github.com/AlexTuTruong/hltv-notifier/assets/53573114/182855f9-084d-471b-8048-3e763ef0192f)
 
 ## License
 
