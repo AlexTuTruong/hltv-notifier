@@ -21,6 +21,9 @@ def send_matches_with_team(user_team):
         if user_team in teams:
             matches_with_team.append(match)
 
+    if not matches_with_team:
+        return
+
     lines = []
     for game in matches_with_team:
         opposing_team = (
